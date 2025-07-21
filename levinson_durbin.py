@@ -31,8 +31,8 @@ def levinson_durbin(p: int, y: np.ndarray):
 
 
 def plot_spectrum(a, E, sr=22050):
-    a = np.concatenate(([1], -a))  # add leading 1 for filter representation
-    b = np.array([np.sqrt(E)])  # gain term
+    a = np.concatenate(([1], -a))
+    b = np.array([np.sqrt(E)])
     w, h = signal.freqz(b, a, worN=2048, fs=sr)
 
     plt.figure(figsize=(10, 6))
@@ -45,9 +45,7 @@ def plot_spectrum(a, E, sr=22050):
     plt.show()
 
 
-
 def main():
-
     y, sr = librosa.load('LJ001-0001.wav', sr=22050)
     print(f"- sample rate: {sr} Hz")
 
@@ -62,9 +60,8 @@ def main():
 
     alpha, E = levinson_durbin(p, y_frame)
 
-    print("\n## Levinson-Durbin Algorithm Results 💡")
+    print("\n## Levinson-Durbin Algorithm Results")
     print("---")
-    # 소수점 4자리까지만 출력하여 가독성을 높입니다.
     print(f"- Linear prediction coefficients (alpha): {np.round(alpha, 2)}")
     print(f"- Prediction error (E): {np.round(E, 4)}")    
 
